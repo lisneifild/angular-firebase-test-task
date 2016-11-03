@@ -13,7 +13,7 @@
       storeData: function (data) {
         var ref = firebase.database().ref().child('messages');
         var dataForBind = $firebaseArray(ref);
-        dataForBind.$add(data);
+        return dataForBind.$add(data);
       }
     };
   }])
@@ -36,15 +36,16 @@
     }
     $scope.sendFormData = function () {
       if (!$scope.form.$invalid) {
-        fireBaseService.storeData($scope.formData);
-        $scope.formSuccessState = true;
-        $timeout(function () {
-          $scope.formSuccessState = false;
+        fireBaseService.storeData($scope.formData).then(function () {
           $scope.formData = {
             email: '',
             password: ''
           }
-        }, 2000);
+          $scope.formSuccessState = true;
+          $timeout(function () {
+            $scope.formSuccessState = false;
+          }, 2000);
+        });
       }
     }
   }
