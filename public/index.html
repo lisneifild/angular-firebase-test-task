@@ -31,7 +31,7 @@
               ng-model="formData.email"
               required
               ng-pattern="rules.email.pattern">
-            <div role="alert">
+            <div role="alert" ng-show="form.$submitted">
               <span class="error" ng-show="form.overwrittenEmail.$error.required">
                 Required!</span>
               <span class="error" ng-show="form.overwrittenEmail.$error.pattern">
@@ -52,7 +52,7 @@
               placeholder="Password"
               ng-model="formData.password"
               required>
-            <div role="alert">
+            <div role="alert" ng-show="form.$submitted">
               <span class="error" ng-show="form.overwrittenPassword.$error.required">
                 Required!</span>
               <span class="error" ng-show="form.overwrittenPassword.$error.minlength">
